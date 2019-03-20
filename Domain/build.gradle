@@ -10,6 +10,7 @@ dependencies {
 
     implementation domainTestDependencies.junit
     implementation domainTestDependencies.assertj
+    implementation domainTestDependencies.mockito
 }
 
 sourceCompatibility = "1.6"
