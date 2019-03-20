@@ -10,7 +10,7 @@ import javax.inject.Inject
 open class GetProjects @Inject constructor(private val projectsRepository: ProjectsRepository, postExecutionThread: PostExecutionThread)
     :ObservableUseCase<List<Project>,Nothing?>(postExecutionThread) {
 
-    override fun buildUseCaseObservable(params: Nothing?): Observable<List<Project>> {
+    public override fun buildUseCaseObservable(params: Nothing?): Observable<List<Project>> {
         return projectsRepository.getProjects()
     }
 }

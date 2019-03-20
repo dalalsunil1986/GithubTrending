@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 
 abstract class ObservableUseCase<T, in Params> constructor(private val postExecutionThread: PostExecutionThread){
 
-    protected abstract  fun buildUseCaseObservable(params: Params? = null): Observable<T>
+    protected abstract fun buildUseCaseObservable(params: Params? = null): Observable<T>
 
     private val disposables = CompositeDisposable()
 

@@ -5,6 +5,7 @@ import github.trending.executor.PostExecutionThread
 import github.trending.interactor.browse.GetProjects
 import github.trending.models.Project
 import github.trending.repository.ProjectsRepository
+import github.trending.test.ProjectDataFactory
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +25,19 @@ class GetProjectsTest {
 
     @Test
     fun getProjectsCompletes(){
+        stubGetProjects(Observable.just(ProjectDataFactory.makeProjectList(2)))
 
+        val testObserver = getProjects.buildUseCaseObservable().test()
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun getProjectsReturnsData(){
+        val projects = ProjectDataFactory.makeProjectList(2)
+        stubGetProjects(Observable.just(projects))
+
+        val testObserver = getProjects.buildUseCaseObservable().test()
+        testObserver.assertValue(projects)
     }
 
     private fun stubGetProjects(observable: Observable<List<Project>>){
