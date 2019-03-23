@@ -4,12 +4,13 @@ import github.trending.executor.PostExecutionThread
 import github.trending.interactor.CompletableUseCase
 import github.trending.repository.ProjectsRepository
 import io.reactivex.Completable
+import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 open class BookmarkProject @Inject constructor(private val projectsRepository: ProjectsRepository,postExecutionThread: PostExecutionThread):
 CompletableUseCase<BookmarkProject.Params>(postExecutionThread){
     override fun buildUseCaseCompletable(params: Params?): Completable {
-        if(params==null) throw IllegalAccessException("Params can't be null")
+        if(params==null) throw IllegalArgumentException("Params can't be null")
         return projectsRepository.bookmarkProject(params.projectId)
     }
 
